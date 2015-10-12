@@ -118,7 +118,8 @@ class ComputingElement(object):
     # Collect global defaults first
     siteName = gConfig.getValue( '/LocalSite/Site' )
     siteType = siteName.split( '.' )[0]
-    for section in [ '/Resources/Computing/CEDefaults', '/Resources/Computing/%s' % self.ceName, '/Resources/Sites/%s/%s/CEs/%s' % ( siteType, siteName, self.ceName )]:
+    for section in [ '/Resources/Computing/CEDefaults', '/Resources/Computing/%s' % self.ceName, '/Resources/Sites/%s/%s/CEs/%s' % ( siteType,
+                                                                                                                     siteName, self.ceName )]:
       result = gConfig.getOptionsDict( section )
       if result['OK']:
         ceOptions = result['Value']
@@ -134,7 +135,6 @@ class ComputingElement(object):
     # Get local CE configuration
     localConfigDict = getLocalCEConfigDict( self.ceName )
     self.ceParameters.update( localConfigDict )
-
     # Adds site level parameters
     section = '/LocalSite'
     result = gConfig.getOptionsDict( section )
@@ -151,7 +151,6 @@ class ComputingElement(object):
           self.ceParameters[option] = value
 
     self._addCEConfigDefaults()
-
 
   def isValid( self ):
     """ Check the sanity of the Computing Element definition
